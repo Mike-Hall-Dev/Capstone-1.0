@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Popular {% endblock%}
+
+{% block content%}
+
+{% if search_results|length < 1 %}
+<h1 class="no-results">No results</h1>
+{% endif %}
+
+<div class="wrapper-grid">
+    {% for movie in search_results%}
+    <div class="container">
+        <a href="/movie/{{movie.id}}">
+            {% if movie.poster_path == None%}
+            <img class="rounded" src="/static/images/default_img.png" alt="">
+            {% else %}
+            <img src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}">
+            {% endif %}
+            <h1 class="name">{{movie.title}}</h1>
+        </a>
+    </div>
+    {% endfor %}
+
+    {% endblock%}

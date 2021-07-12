@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Popular {% endblock%}
+
+{% block content%}
+
+<div class="sort-buttons">
+    <a href="/top_rated"><button class="btn btn-success">Top Rated</button></a>
+    <a href="/upcoming"><button class="btn btn-success">Upcoming</button></a>
+</div>
+
+
+<div class="wrapper-grid">
+    {% for movie in popular_movies_list %}
+    <div class="container">
+        <a href="/movie/{{movie.id}}">
+            {% if movie.poster_path == None%}
+            <img class="rounded" src="/static/images/default_img.png" alt="">
+            {% else %}
+            <img src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}">
+            {% endif %}
+            <h1 class="name">{{movie.title}}</h1>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+<!-- Pagination -->
+<nav class="paginate-nav">
+    <ul class="pagination justify-content-center ">
+        {% if page == 1 %}
+        <li class="hidden">
+            {% else %}
+        <li class="page-item">
+            {% endif %}
+            <a class="page-link" href="{{url_for('show_home_page')}}">First</a>
+        </li>
+        {% if page - 1 == 0 %}
+        <li class="page-item disabled">
+            {% else %}
+        <li class="page-item">
+            {% endif %}
+            <a class="page-link" href="/{{page - 1}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% if page < 500 %}
+        {% for i in range(page,page + 3) %}
+        {% if i == page %}
+        <li class="page-item active"><a class="page-link" href="/{{i}}">{{i}}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="/{{i}}">{{i}}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="/{{page + 1}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="/{{total_pages}}">Last</a>
+        </li>
+
+    </ul>
+</nav>
+
+
+{% endblock%}
