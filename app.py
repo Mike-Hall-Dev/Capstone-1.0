@@ -12,7 +12,7 @@ import requests
 app = Flask(__name__)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
-app.config['SECRET_KEY'] = "SECRET!"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default_value')
 
 debug = DebugToolbarExtension(app)
 
@@ -128,7 +128,7 @@ def show_top_rated(page):
     top_rated_movies = data['results']
     total_pages = data['total_pages']
 
-    return render_template('top_rated_movies.html', top_rated_movies=top_rated_movies, page=page,total_pages=total_pages)
+    return render_template('top_rated_movies.html', top_rated_movies=top_rated_movies, page=page, total_pages=total_pages)
 
 
 @app.route('/upcoming', defaults={'page': 1})
@@ -161,7 +161,6 @@ def show_movie_details(movie_id):
 
     similar_data = similar_movies_response.json()
     similar_movie_data = similar_data['results']
-
 
     genre_list = [genre['name'] for genre in movie_data['genres']]
     curr_user = User.query.get(g.user.id)
