@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <!-- <div class="container">
         {% for category, message in get_flashed_messages(with_categories=True) %}
         <div class="alert alert-{{ category }}">{{ message }}</div>
         {% endfor %}
@@ -38,7 +38,38 @@
                     <button class="btn btn-primary btn-lg btn-block">Sign me up!</button>
                 </form>
             </div>
+        </div> -->
+
+    <section class="form my-4 mx-5">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <img src="/static/images/popcorn.jpeg" alt="" class="img-fluid">
+                </div>
+                <div class="col-lg-7">
+                    <form method="POST" id="user_form">
+                        {{ form.hidden_tag() }}
+                        {% for field in form if field.widget.input_type != 'hidden' %}
+                        {% for error in field.errors %}
+                        {% endfor %}
+                        <span class="text-danger">{{ error }}</span>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                {{ field(placeholder=field.label.text, class="form-control") }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <button class="btn btn-primary btn-lg btn-block">Sign me up!</button>
+                            </div>
+                        </div>
+                        <p>Already signed up?<a href="#">Login Here</a> </p>
+                    </form>
+                </div>
+            </div>
         </div>
+    </section>
 
 </body>
 

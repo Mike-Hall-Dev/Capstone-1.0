@@ -123,9 +123,10 @@ img {
     border-radius: .5%;
     grid-template-columns: repeat(auto-fit, 13rem);
     justify-content: center;
-    margin-top: .5rem;
+    margin-top: 2rem;
     margin-left: 7%;
     margin-right: 7%;
+    margin-bottom: 2rem;
   }
   
   .container {
@@ -252,7 +253,9 @@ img {
 
 
 .abc{
-    padding-top: 10%;
+    max-width: 700px;
+    text-align: center;
+    margin: 0
 }
 
 .movie-props{
@@ -264,4 +267,20 @@ img {
     color: seashell;
     font-size: 40px;
     font-weight: bold;
+}
+
+.page-dark{
+  background-color: rgb(51, 50, 49);
+  border: 1px solid white;
+  color: white
+}
+
+.current {
+  background-color: #0275d8;
+  border: 1px solid white;
+  color: white
+}
+
+.disable{
+  pointer-events: none;
 }

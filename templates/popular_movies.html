@@ -34,34 +34,61 @@
             {% else %}
         <li class="page-item">
             {% endif %}
-            <a class="page-link" href="{{url_for('show_home_page')}}">First</a>
+            <a class="page-link page-dark" href="{{url_for('show_home_page')}}">First</a>
         </li>
         {% if page - 1 == 0 %}
-        <li class="page-item disabled">
-            {% else %}
+        <li class="page-item disable">
+            <span class="page-link page-dark" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </span>
+        </li>
+        {% else %}
         <li class="page-item">
-            {% endif %}
-            <a class="page-link" href="/{{page - 1}}" aria-label="Previous">
+            <a class="page-link page-dark" href="/{{page - 1}}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        {% if page < 500 %}
+        {% endif %}
+
+        {% if page < total_pages %}
+        {% if page == total_pages - 1%}
+        <li class="page-item"><a class="page-link page-dark" href="/{{total_pages-2}}">{{total_pages-2}}</a></li>
+        <li class="page-item"><a class="page-link current" href="/{{total_pages-1}}">{{total_pages-1}}</a></li>
+        <li class="page-item"><a class="page-link page-dark" href="/{{total_pages}}">{{total_pages}}</a></li>
+        {% else %}
         {% for i in range(page,page + 3) %}
         {% if i == page %}
-        <li class="page-item active"><a class="page-link" href="/{{i}}">{{i}}</a></li>
+        <li class="page-item"><a class="page-link current" href="/{{i}}">{{i}}</a></li>
         {% else %}
-        <li class="page-item"><a class="page-link" href="/{{i}}">{{i}}</a></li>
+        <li class="page-item"><a class="page-link page-dark" href="/{{i}}">{{i}}</a></li>
         {% endif %}
         {% endfor %}
         {% endif %}
+        {% endif %}
+
+        {% if page == total_pages %}
+        <li class="page-item"><a class="page-link page-dark" href="/{{total_pages-2}}">{{total_pages-2}}</a></li>
+        <li class="page-item"><a class="page-link page-dark" href="/{{total_pages-1}}">{{total_pages-1}}</a></li>
+        <li class="page-item"><a class="page-link current" href="/{{total_pages}}">{{total_pages}}</a></li>
+        <li class="page-item disable">
+            <a class="page-link page-dark" href="/{{page + 1}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <li class="hidden">
+            <a class="page-link page-dark" href="/{{total_pages}}">Last</a>
+        </li>
+        {% else %}
         <li class="page-item">
-            <a class="page-link" href="/{{page + 1}}" aria-label="Next">
+            <a class="page-link page-dark" href="/{{page + 1}}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="/{{total_pages}}">Last</a>
+            <a class="page-link page-dark" href="/{{total_pages}}">Last</a>
         </li>
+        {% endif%}
+
 
     </ul>
 </nav>
