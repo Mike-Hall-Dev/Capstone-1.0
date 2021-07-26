@@ -39,7 +39,7 @@
                 </form>
             </div>
         </div> -->
-
+    <!-- 
     <section class="form my-4 mx-5">
         <div class="container">
             <div class="row no-gutters">
@@ -69,8 +69,26 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
+    <div class="center">
+        <h1>Welcome to Cinema Search</h1>
+        <form id="user_form" method="POST">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+            <span class="text-danger">{{ error }}</span>
+            <div class="form-row">
+                <div class="txt_field">
+                    {{ field(placeholder=field.label.text) }}
+                </div>
+            </div>
+            {% endfor %}
+            <button class="btn btn-primary btn-lg">Sign me up!</button>
+        </form>
+    </div>
 </body>
 
 </html>
