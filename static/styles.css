@@ -324,7 +324,7 @@ form .txt_field{
   outline: none;
 }
 
-form button{
+.center button{
   margin-left: 27%;
   margin-bottom: 1rem;
 }
